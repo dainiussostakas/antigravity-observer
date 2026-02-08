@@ -26,7 +26,20 @@
           "type": "number",
           "default": 60,
           "minimum": 10,
-          "description": "Interval in seconds to refresh quota data"
+          "maximum": 3600,
+          "markdownDescription": "Interval in seconds to refresh quota data. **Minimum: 10 seconds**",
+          "editPresentation": "singlelineText",
+          "order": 1
+        },
+        "antigravity-observer.selectedModels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Status bar QuickPick to select models.",
+          "scope": "application",
+          "order": 99
         }
       }
     },
