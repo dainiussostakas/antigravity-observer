@@ -1,6 +1,5 @@
 /**
  * Process Discovery - Finds Antigravity Language Server process and extracts credentials
- * Adapted from antigravity-panel-main/src/shared/platform/ambient_discovery.ts
  */
 
 import { exec } from 'child_process';

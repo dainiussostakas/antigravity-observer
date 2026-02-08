@@ -1,5 +1,5 @@
 /**
- * HTTP Client Utility - Simplified from antigravity-panel-main
+ * HTTP Client Utility
  * Supports automatic HTTPS → HTTP fallback for local Language Server communication
  */
 

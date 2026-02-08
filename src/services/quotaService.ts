@@ -1,6 +1,5 @@
 /**
  * Quota Service - Fetches and parses quota data from Language Server
- * Adapted from antigravity-panel-main/src/model/services/quota.service.ts
  */
 
 import { makeRequest } from '../utils/httpClient';
