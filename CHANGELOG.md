@@ -32,9 +32,10 @@
 - Internal model selection persistence
 
 ### Security
-- Secure API key handling and storage
+- Localhost-only communication with Language Server
+- No external API access or keys required
 - No sensitive data logging
-- Encrypted configuration storage
+- Secure command execution with injection protection
 
 Security Tests
   ✔ Shell escaping prevents command injection
