@@ -36,4 +36,13 @@
 - No sensitive data logging
 - Encrypted configuration storage
 
-[1.0.0]: https://github.com/yourusername/antigravity-observer/releases/tag/v1.0.0
+Security Tests
+  ✔ Shell escaping prevents command injection
+  ✔ ReDoS regex completes in reasonable time 
+  ✔ Global scope is not polluted
+  ✔ Cache size is bounded (LRU eviction)     
+  ✔ Type safety prevents runtime errors
+  ✔ Input validation sanitizes malicious data
+  ✔ Port extraction regex is bounded
+
+[1.0.0]: https://github.com/dainiussostakas/antigravity-observer/releases/tag/v1.0.0
