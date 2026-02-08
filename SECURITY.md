@@ -39,26 +39,27 @@ If you discover a security vulnerability, please:
 
 ## ✅ Implemented Security Features
 
+### Localhost-Only Communication
+- ✅ Only communicates with local Language Server (127.0.0.1)
+- ✅ Uses CSRF tokens from Language Server process
+- ✅ No external network requests
+- ✅ No API keys required or stored
+
 ### Command Injection Protection
 - ✅ Shell argument escaping for all system commands
 - ✅ PowerShell injection protection
-- ✅ Sanitized grep patterns
+- ✅ Sanitized grep patterns for process discovery
 
 ### Memory Safety
-- ✅ Bounded LRU cache (100 entries max)
+- ✅ Bounded cache for quota data
 - ✅ ReDoS protection with bounded regex quantifiers
 - ✅ Type safety with TypeScript strict mode
-
-### Scope Protection
-- ✅ No global scope pollution
-- ✅ Module-scoped functions only
-- ✅ No external API exposure
 
 ### Input Validation
 - ✅ Server response validation
 - ✅ Numeric range checks (percentages 0-100)
-- ✅ String sanitization with character filtering
-- ✅ Length limits on all string inputs
+- ✅ String sanitization
+- ✅ Configuration value validation
 
 ### Secure Logging
 - ✅ No console.log (uses VS Code Output API)
