@@ -2,7 +2,12 @@
   "name": "antigravity-observer",
   "displayName": "Antigravity Observer",
   "description": "Display Google AI quota information",
-  "version": "1.0.1",
+  "version": "1.0.0",
+  "publisher": "ds-labs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dainiussostakas/antigravity-observer.git"
+  },
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -37,6 +42,7 @@
     "compile": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "package": "node esbuild.js --production",
+    "build": "vsce package --out dist/",
     "test": "npm run test:security",
     "test:security": "mocha -r ts-node/register src/test/security.test.ts",
     "test:vscode": "vscode-test"
