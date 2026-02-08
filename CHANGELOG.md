@@ -12,7 +12,6 @@
 - Added detailed usage instructions for model selection
 - Documented intelligent display logic and sorting priorities
 - Added important note about restarting IDE when switching accounts
-- Translated all Lithuanian text to English for consistency
 
 ### Added
 - Initial release of Antigravity Observer
