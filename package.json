@@ -1,0 +1,53 @@
+{
+  "name": "antigravity-observer",
+  "displayName": "Antigravity Observer",
+  "description": "Display Google AI quota information",
+  "version": "1.0.1",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Antigravity Observer",
+      "properties": {
+        "antigravity-observer.refreshRate": {
+          "type": "number",
+          "default": 60,
+          "minimum": 10,
+          "description": "Interval in seconds to refresh quota data"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "antigravity-quota.refresh",
+        "title": "Refresh Quota"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "test": "npm run test:security",
+    "test:security": "mocha -r ts-node/register src/test/security.test.ts",
+    "test:vscode": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.50.0",
+    "esbuild": "^0.27.3",
+    "mocha": "^11.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}
