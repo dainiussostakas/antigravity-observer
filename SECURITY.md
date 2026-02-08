@@ -104,7 +104,8 @@ Before each release, we verify:
 
 ## 📅 Security Changelog
 
-### v1.0.1 (2026-02-08)
+### v1.0.0 (2026-02-08)
+- Base implementation
 - **SECURITY**: Fixed command injection in process discovery (grep pattern)
 - **SECURITY**: Removed global scope pollution (`restartPolling` function)
 - **SECURITY**: Added ReDoS protection (bounded regex quantifiers)
@@ -112,9 +113,6 @@ Before each release, we verify:
 - **SECURITY**: Added input validation and sanitization
 - **SECURITY**: Replaced console.log with secure logger API
 - **SECURITY**: Increased minimum refresh rate to 30s
-
-### v1.0.0 (Initial Release)
-- Base implementation
 
 ## 🛡️ Security Practices
 
