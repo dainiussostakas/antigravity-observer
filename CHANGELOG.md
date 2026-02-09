@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.1] - 2026-02-09
+
+### Fixed
+- QuickPick model selection now correctly persists (restored `selectedModels` configuration)
+- Sidebar models now consistently sorted by: usage percentage → reset time → name
+
+### Changed
+- Tooltip markers now reflect actual sidebar display (• = displayed, ○ = selected but not displayed)
+- QuickPick items sorted alphabetically for consistency with tooltip
+- User-selected models in sidebar now sorted by usage percentage (previously unsorted)
+
+---
+
 ## [1.0.0] - 2026-02-08
 
 ### Changed
