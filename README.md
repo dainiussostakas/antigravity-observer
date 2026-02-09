@@ -31,3 +31,40 @@ The extension automatically determines which models to display in the status bar
 
 **When switching to a different account, it is recommended to restart the Antigravity IDE** to ensure proper quota information display and avoid cache-related issues.
 
+## Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Setup
+
+```bash
+npm install
+```
+
+### Compile
+
+```bash
+npm run compile    # Development build (with watch mode)
+npm run package    # Production build
+```
+
+### Test
+
+```bash
+npm test           # Run security tests
+```
+
+### Build VSIX Package
+
+```bash
+npm run build      # Creates dist/antigravity-observer-x.x.x.vsix
+```
+
+### Install Extension
+
+1. Open Antigravity IDE
+2. Extensions → Install from VSIX
+3. Select `dist/antigravity-observer-x.x.x.vsix`
