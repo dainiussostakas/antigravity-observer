@@ -11,7 +11,7 @@
 - QuickPick items sorted alphabetically for consistency with tooltip
 - User-selected models in sidebar now sorted by usage percentage (previously unsorted)
 
-[1.0.1]: https://github.com/dainiussostakas/antigravity-observer/releases/tag/v.1.0.1
+[1.0.1]: https://github.com/dainiussostakas/antigravity-observer/releases/tag/1.0.1
 
 ---
 
@@ -60,4 +60,4 @@ Security Tests
   ✔ Input validation sanitizes malicious data
   ✔ Port extraction regex is bounded
 
-[1.0.0]: https://github.com/dainiussostakas/antigravity-observer/releases/tag/v.1.0.0
+[1.0.0]: https://github.com/dainiussostakas/antigravity-observer/releases/tag/1.0.0
