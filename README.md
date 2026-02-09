@@ -18,6 +18,8 @@ Antigravity Observer is an extension for the Antigravity IDE designed to track a
 
 To select an AI model, **click on the status bar** at the bottom of the IDE where quota information is displayed. A list of available Gemini models will appear - choose your desired model from the list.
 
+![Model Selection](assets/example-1.png)
+
 ### Display Logic
 
 The extension automatically determines which models to display in the status bar using intelligent display logic:
