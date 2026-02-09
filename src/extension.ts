@@ -54,8 +54,12 @@ export function activate(context: vscode.ExtensionContext) {
         const config = vscode.workspace.getConfiguration('antigravity-observer');
         const currentSelection = config.get<string[]>('selectedModels', []);
 
-        // Create QuickPick items
-        const items = latestQuota.models.map((m: any) => ({
+        // Create QuickPick items (sorted alphabetically to match tooltip)
+        const sortedModels = [...latestQuota.models].sort((a: any, b: any) =>
+            a.label.localeCompare(b.label)
+        );
+
+        const items = sortedModels.map((m: any) => ({
             label: m.label,
             description: `${m.remainingPercentage.toFixed(0)}% remaining`,
             picked: currentSelection.includes(m.label)
@@ -73,10 +77,8 @@ export function activate(context: vscode.ExtensionContext) {
             const labels = selected.map((item: any) => item.label);
             await config.update('selectedModels', labels, vscode.ConfigurationTarget.Global);
 
-            // Update UI immediately
-            myStatusBarItem.hide();
+            // Update UI immediately (no hide/show needed - updates instantly)
             updateStatusBarFromQuota(latestQuota, labels);
-            setTimeout(() => myStatusBarItem.show(), 100);
         });
 
         // Accept handler (Enter key)
@@ -162,7 +164,19 @@ function updateStatusBarFromQuota(quota: any, selectedModels: string[]) {
 
     let modelsToShow = quota.models;
     if (selectedModels.length > 0) {
-        modelsToShow = quota.models.filter((m: any) => selectedModels.includes(m.label));
+        // Filter by selection, then sort by: % → reset → name
+        modelsToShow = quota.models
+            .filter((m: any) => selectedModels.includes(m.label))
+            .sort((a: any, b: any) => {
+                if (a.remainingPercentage !== b.remainingPercentage) {
+                    return a.remainingPercentage - b.remainingPercentage;
+                }
+                if (a.resetTime && b.resetTime) {
+                    const timeDiff = a.resetTime.getTime() - b.resetTime.getTime();
+                    if (timeDiff !== 0) return timeDiff;
+                }
+                return a.label.localeCompare(b.label);
+            });
     } else {
         // Show 3 most used models with multi-level sort:
         // 1. Lowest remaining % (most used)
@@ -289,8 +303,19 @@ async function refreshQuota() {
         // 6. Update Status Bar
         let modelsToShow = quota.models;
         if (selectedModels.length > 0) {
-            // Filter by selection
-            modelsToShow = quota.models.filter(m => selectedModels.includes(m.label));
+            // Filter by selection, then sort by: % → reset → name
+            modelsToShow = quota.models
+                .filter(m => selectedModels.includes(m.label))
+                .sort((a: any, b: any) => {
+                    if (a.remainingPercentage !== b.remainingPercentage) {
+                        return a.remainingPercentage - b.remainingPercentage;
+                    }
+                    if (a.resetTime && b.resetTime) {
+                        const timeDiff = a.resetTime.getTime() - b.resetTime.getTime();
+                        if (timeDiff !== 0) return timeDiff;
+                    }
+                    return a.label.localeCompare(b.label);
+                });
         } else {
             // Show 3 most used models with multi-level sort:
             // 1. Lowest remaining % (most used)

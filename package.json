@@ -2,7 +2,7 @@
   "name": "antigravity-observer",
   "displayName": "Antigravity Observer",
   "description": "Display Google AI quota information",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "ds-labs",
   "repository": {
     "type": "git",
