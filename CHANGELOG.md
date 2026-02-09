@@ -60,10 +60,10 @@ Nothing
 - Secure command execution with injection protection
 
 Security Tests
-  ✔ Shell escaping prevents command injection
-  ✔ ReDoS regex completes in reasonable time 
-  ✔ Global scope is not polluted
-  ✔ Cache size is bounded (LRU eviction)     
-  ✔ Type safety prevents runtime errors
-  ✔ Input validation sanitizes malicious data
-  ✔ Port extraction regex is bounded
+- ✔ Shell escaping prevents command injection
+- ✔ ReDoS regex completes in reasonable time 
+- ✔ Global scope is not polluted
+- ✔ Cache size is bounded (LRU eviction)     
+- ✔ Type safety prevents runtime errors
+- ✔ Input validation sanitizes malicious data
+- ✔ Port extraction regex is bounded
