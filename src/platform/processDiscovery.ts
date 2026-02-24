@@ -52,6 +52,11 @@ export async function discoverLanguageServer(): Promise<ServerInfo | null> {
 
             // 3. Get listening ports for this PID
             const ports = await getListeningPorts(proc.pid);
+            // Add explicitly provided port from arguments if not already found
+            if (extracted.port && !ports.includes(extracted.port)) {
+                ports.unshift(extracted.port); // Try this one first
+            }
+
             if (ports.length === 0) continue;
 
             debugLog(`[Discovery] Process ${proc.pid} has ${ports.length} listening port(s)`);
@@ -195,18 +200,28 @@ async function getListeningPorts(pid: number): Promise<number[]> {
 }
 
 /**
- * Extract port numbers from netstat/lsof output
+ * Extract port numbers from the output of network commands.
  */
-function extractPortsFromOutput(output: string, platform: string): number[] {
+function extractPortsFromOutput(output: string, platform: NodeJS.Platform): number[] {
     const ports: number[] = [];
-    // Limited quantifiers to prevent ReDoS
-    const regex = platform === 'win32'
-        ? /(?:127\.0\.0\.1|0\.0\.0\.0|\[::1?\]):(\d+)\s+\S{1,100}\s+LISTENING/gi
-        : /(?:TCP|UDP|LISTEN)\s+(?:\*|[\d.]{1,50}|\[[\da-f:]{1,50}\]):(\d+)/gi;
+    let regex: RegExp;
+
+    if (platform === 'win32') {
+        // netstat -ano output: TCP    0.0.0.0:12345          0.0.0.0:0              LISTENING       1234
+        regex = /:(\d+)\s+0\.0\.0\.0:0\s+LISTENING\s+\d+/g;
+    } else if (platform === 'darwin') {
+        // lsof output: COMMAND  PID    USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+        // node    12345 user   10u  IPv4 0x12345678      0t0  TCP *:12345 (LISTEN)
+        regex = /TCP \*\:(\d+) \(LISTEN\)/g;
+    } else {
+        // Linux ss -tlnp output: LISTEN 0      40960                      *:12345                    *:*    users:(("node",pid=12345,fd=10))
+        // Linux lsof output (fallback): node    12345 user   10u  IPv4 0x12345678      0t0  TCP *:12345 (LISTEN)
+        regex = /(?::|@)(\d+)\s+\S+\s+users:\(\("?\S+"?,pid=\d+,fd=\d+\)\)|TCP \*\:(\d+) \(LISTEN\)/g;
+    }
 
     let match;
     while ((match = regex.exec(output)) !== null) {
-        const port = parseInt(match[1], 10);
+        const port = parseInt(match[1] || match[2], 10); // Handle two possible capture groups for Linux regex
         if (port > 0 && !ports.includes(port)) {
             ports.push(port);
         }
